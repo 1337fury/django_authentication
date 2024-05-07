@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block costum_link %}
+	<link rel="stylesheet" href="{% static 'main/login.css' %}">
+{% endblock %}
+{% block title %} Login Page {% endblock %}
+{% block content %}
+	<div class="bd">
+		<div class="form-container">
+			<div class="left-section">
+				<img src="{% static 'main/images/bg-retro.webp' %}" alt="Game Image">
+			</div>
+			<div class="right-section">
+				<h2>Login</h2>
+				<form id="loginForm" method="post" action="{% url 'index' %}">
+					{% csrf_token %}{{form.as_p}}
+					<button type="submit">Login</button>
+				</form>
+				<p>Don't have an account? Create one <a href="/sign-up">Here</a>!</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}
