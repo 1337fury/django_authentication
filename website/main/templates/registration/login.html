@@ -12,11 +12,11 @@
 			</div>
 			<div class="right-section">
 				<h2>Login</h2>
-				<form id="loginForm" method="post" action="{% url 'index' %}">
+				<form id="loginForm" method="post" action="{% url 'login' %}">
 					{% csrf_token %}{{form.as_p}}
 					<button type="submit">Login</button>
 				</form>
-				<p>Don't have an account? Create one <a href="/sign-up">Here</a>!</p>
+				<p>Don't have an account? Create one <a href="/sign_up">Here</a>!</p>
 			</div>
 		</div>
 	</div>
