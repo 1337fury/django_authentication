@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+{% block title %}
+Create Post
+{% endblock %}
+{% block content %}
+<h1>Create Post</h1>
+<form method="post" action="{% url 'create_post' %}">
+	{% csrf_token %}
+	{{form.as_p}}
+	<button type="submit">Create Post</button>
+</form>
+{% endblock %}
