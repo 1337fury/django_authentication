@@ -1,12 +1,27 @@
 {% extends 'main/base.html' %}
+
 {% block title %}
 Create Post
 {% endblock %}
+
 {% block content %}
-<h1>Create Post</h1>
-<form method="post" action="{% url 'create_post' %}">
-	{% csrf_token %}
-	{{form.as_p}}
-	<button type="submit">Create Post</button>
-</form>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="mb-4">Create Post</h1>
+            <form method="post" action="{% url 'create_post' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_title" class="form-label">Title</label>
+                    {{ form.title }}
+                </div>
+                <div class="mb-3">
+                    <label for="id_content" class="form-label">Content</label>
+                    {{ form.content }}
+                </div>
+                <button type="submit" class="btn btn-primary">Create Post</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
