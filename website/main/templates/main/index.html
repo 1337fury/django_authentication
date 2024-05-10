@@ -1,5 +1,38 @@
-{% extends 'main/base.html' %}
-{% block title %}Home page{% endblock %}
-{% block content %}
-	<h1>Home page</h1>
+{% extends 'main/base.html' %} {% block title %}Home page{% endblock %} {% block
+content %}
+<div class="container py-5">
+  <h1 class="display-4 text-center" style="color: #007bff">Home page</h1>
+  <p class="lead text-center" style="color: #6c757d">
+    Welcome to the home page of the website.
+  </p>
+  <hr class="my-4" />
+  <div class="row">
+    {% for post in posts %}
+    <div class="col-md-6 offset-md-3">
+      <div class="card mb-4 shadow-sm border-0">
+        <div class="card-body">
+          <h3 class="card-title" style="color: #343a40">{{ post.title }}</h3>
+          <p class="card-text" style="color: #495057">{{ post.content }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <small class="text-muted" style="color: #6c757d"
+                >Published on {{ post.date_created }}</small
+              >
+            </div>
+            {% if post.author == request.user %}
+            <div>
+              <small class="text-muted" style="color: #6c757d"
+                >Author: {{ post.author }}</small
+              >
+              <a href="#" class="btn btn-danger btn-sm ms-2">Delete</a>
+            </div>
+            {% endif %}
+          </div>
+          <a href="#" class="btn btn-primary mt-3">Read More</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
