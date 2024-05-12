@@ -5,10 +5,13 @@ from .forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect
+from .models import Post
+from django.shortcuts import get_object_or_404
 
-@login_required(login_url="login")
+@login_required(login_url="/login")
 def index(request):
-    return render(request, "main/index.html")
+    posts = Post.objects.all()
+    return render(request, "main/index.html", {"posts": posts})
 
 def sign_up(request):
     if request.method == "POST":
@@ -21,7 +24,7 @@ def sign_up(request):
         form = RegistrationForm()
     return render(request, "registration/sign_up.html", {"form": form})
 
-@login_required(login_url="create_post")
+@login_required(login_url="/login")
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
@@ -33,3 +36,10 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, "main/create_post.html", {"form": form})
+
+@login_required(login_url="/login")
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        post.delete()
+    return redirect("/home")
