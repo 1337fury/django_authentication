@@ -11,7 +11,7 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Sign Up</h2>
-                    <form method="post" action="/sign_up">
+                    <form method="post" action="/sign-up">
                         {% csrf_token %}{{form.as_p}}
 						{% if messages %}
 							{% for message in messages %}
