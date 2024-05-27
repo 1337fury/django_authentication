@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from .forms import RegistrationForm
 from .forms import PostForm
-# import login_required decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect
 from .models import Post
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import permission_required
 
 @login_required(login_url="/login")
 def index(request):
@@ -25,6 +25,7 @@ def sign_up(request):
     return render(request, "registration/sign_up.html", {"form": form})
 
 @login_required(login_url="/login")
+@permission_required("main.add_post", raise_exception=True) # This decorator checks if the user has the add_post permission and raises a PermissionDenied exception if they don't
 def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
