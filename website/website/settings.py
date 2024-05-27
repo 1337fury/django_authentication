@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms', # this is for crispy forms, it is a third party app that makes forms look better and easier to style
     # 'crispy-bootstrap5',
+    'django_extensions', # this is for running scripts in Django
 ]
 
 MIDDLEWARE = [
