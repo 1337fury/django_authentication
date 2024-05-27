@@ -17,15 +17,15 @@
                         <div>
                             <small class="text-muted" style="color: #6c757d;">Published on {{ post.date_created }}</small>
                         </div>
-                        {% if post.author == request.user %}
                         <div>
-                            <small class="text-muted" style="color: #6c757d;">Author: {{ post.author }}</small>
-							<form method="post" action="{% url 'delete_post' post.pk %}" style='display: inline;'>
-								{% csrf_token %}
-								<button type="submit" class="btn btn-danger btn-sm ms-2">Delete</button>
-							</form>
+							<small class="text-muted" style="color: #6c757d;">Author: {{ post.author }}</small>
+							{% if post.author == request.user or perms.main.delete_post %}
+								<form method="post" action="{% url 'delete_post' post.pk %}" style='display: inline;'>
+									{% csrf_token %}
+									<button type="submit" class="btn btn-danger btn-sm ms-2">Delete</button>
+								</form>
+							{% endif %}
                         </div>
-                        {% endif %}
                     </div>
                 </div>
             </div>
