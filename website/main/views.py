@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from .models import Post
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import permission_required
+from django.contrib import messages
 
 @login_required(login_url="/login")
 def index(request):
@@ -19,7 +20,10 @@ def sign_up(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, 'Your account has been created successfully!')
             return redirect(request.GET.get('next', 'home'))
+        else:
+            messages.error(request, 'Please review the form and correct the errors.')
     else:
         form = RegistrationForm()
     return render(request, "registration/sign_up.html", {"form": form})
